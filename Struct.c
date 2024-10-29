@@ -2,6 +2,83 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define TAM 50
+
+struct Aluno{
+	char nome[32];
+	char telefone[32];
+	char email[32];
+	
+};
+
+struct Matricula{
+	int numero_matricula;
+	char nomeCurso[32];
+	int coef;
+	
+	struct Aluno aluno;
+};
+
+struct Matricula matricula[TAM];
+
+int tot_matricula = 0;
+
+int pesq_matricula(int verif_matricula){
+	 int i;
+	 for(i = 0; i < tot_matricula; i++){
+		 if (matricula[i].numero_matricula == verif_matricula){
+			 return i;
+		 }
+	 } 
+	 return -1;
+}
+
+void inserir_Aluno(){
+	struct Matricula copia_matricula;
+	
+	
+	printf("Insira o numero de matricula do aluno: ");
+	scanf("%d", &copia_matricula.numero_matricula);
+	if (pesq_matricula(copia_matricula.numero_matricula) != -1){
+		printf("Matricula já existe!!");
+		return;
+	}
+	
+	printf("Nome Do Aluno: ");
+	scanf(" %[^\n]", copia_matricula.aluno.nome);
+	printf("Telefone: ");
+	scanf(" %[^\n]", copia_matricula.aluno.telefone);
+	printf("Email: ");
+	scanf(" %[^\n]", copia_matricula.aluno.email);
+	printf("Nome Do Curso:");
+	scanf(" %[^\n]", copia_matricula.nomeCurso);
+	do {
+		printf("Coeficiente de rendimento(0-100): ");
+		scanf("%d", &copia_matricula.coef);
+	} while(copia_matricula.coef < 0 || copia_matricula.coef > 100);
+	
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int menu() {
 	int op;
 	system("@cls||clear");  // LIMPA A TELA
@@ -22,6 +99,11 @@ int menu() {
 }
 
 int main() {
+	
+	
+	
+	
+	
 	int op;
 	do {
 		op = menu();
@@ -31,6 +113,7 @@ int main() {
 				break;
 			case 1:
 				// INSERIR
+				inserir_Aluno();
 				break;
 			case 2:
 				// PESQUISAR POR CODIGO/MATRICULA
