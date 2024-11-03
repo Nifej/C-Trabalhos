@@ -23,7 +23,7 @@ struct Matricula matricula[TAM];
 
 int tot_matricula = 0;
 
-int pesq_matricula(int verif_matricula){
+int verif_matricula(int verif_matricula){
 	 int i;
 	 for(i = 0; i < tot_matricula; i++){
 		 if (matricula[i].numero_matricula == verif_matricula){
@@ -39,8 +39,9 @@ void inserir_Aluno(){
 	
 	printf("Insira o numero de matricula do aluno: ");
 	scanf("%d", &copia_matricula.numero_matricula);
-	if (pesq_matricula(copia_matricula.numero_matricula) != -1){
-		printf("Matricula já existe!!");
+	
+	if (verif_matricula(copia_matricula.numero_matricula) != -1){
+		printf("Matricula ja existe!!");
 		return;
 	}
 	
@@ -57,12 +58,33 @@ void inserir_Aluno(){
 		scanf("%d", &copia_matricula.coef);
 	} while(copia_matricula.coef < 0 || copia_matricula.coef > 100);
 	
-
-	//teste
+	matricula[tot_matricula] = copia_matricula;
+	tot_matricula++;
 }
 
 
+void pesq_matricula(){
+	int indi, pesq;
+	printf("Numero de Matricula: ");
+	scanf("%d", &indi);
+	pesq = verif_matricula(indi);
+	if (pesq == -1){
+		printf("matricula invalida");
+		return;
+	}
 
+	printf("Nome Do Aluno%s: ", matricula[pesq].aluno.nome);
+	printf("\nTelefone: ");
+	printf("\nEmail: ");
+	printf("\nNome Do Curso:");
+	printf("\nCoeficiente de rendimento(0-100): ");
+	
+
+	//printf("Aluno de Matricula: %d\n", matricula[indice].numero_matricula);
+	
+	
+	return;
+}
 
 
 
@@ -84,7 +106,7 @@ int menu() {
 	system("@cls||clear");  // LIMPA A TELA
 	printf("\n\nSISTEMA XXYYZZ\n\n");
 	printf("1 - Inserir\n");
-	printf("2 - Pesquisar por número\n");
+	printf("2 - Pesquisar por nï¿½mero\n");
 	printf("3 - Pesquisar por nome\n");
 	printf("4 - Atualizar\n");
 	printf("5 - Maior\n");
@@ -92,7 +114,7 @@ int menu() {
 	printf("7 - Listar\n");
 	printf("0 - Sair\n");
 	do {
-		printf("Escolha sua opção: ");
+		printf("Escolha sua opï¿½ï¿½o: ");
 		scanf(" %d", &op);
 	} while(op < 0 || op > 7);
 	return op;
@@ -109,7 +131,7 @@ int main() {
 		op = menu();
 		switch ( op ) {
 			case 0:
-				// SAIR. NÃO PRECISA FAZER NADA
+				// SAIR. Nï¿½O PRECISA FAZER NADA
 				break;
 			case 1:
 				// INSERIR
@@ -117,6 +139,7 @@ int main() {
 				break;
 			case 2:
 				// PESQUISAR POR CODIGO/MATRICULA
+				pesq_matricula();
 				break;
 			case 3:
 				// PESQUISAR POR NOME
@@ -134,7 +157,7 @@ int main() {
 				// LISTAR
 				break;
 			default:
-				printf ("\n\nOpçãoo inválida!\n\n");
+				printf ("\n\nOpï¿½ï¿½oo invï¿½lida!\n\n");
 		}
 
 		system("PAUSE");  // Windows
